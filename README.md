@@ -25,7 +25,10 @@ Go to the working directory and run
 Then a file name "database" For Sqlite is generated.
 Also a table is created with fields id(auto incr), task and date
 
-3. Make an alias in shell script "task"
+3. Launch restful service
+python api.py
+
+4. Make an alias in shell script "task"
 In shell file "task", make an ailas pointing to "jq" lib for json parsing as below
 jq="./jq"
 
