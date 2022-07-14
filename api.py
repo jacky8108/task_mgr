@@ -163,7 +163,7 @@ def remove_task(id):
     Delete a task by providing task id
     """
     try:
-        tasktoupdelete =  Task.get_task(id)
+        tasktodelete =  Task.get_task(id)
         if tasktodelete == None:
             logging.error('Delete task：task ' + str(id) + ' not exist! ')
             return Response('Delete task: task ' + str(id)  + ' not exist ', 200, mimetype='application/json')
