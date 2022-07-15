@@ -43,6 +43,7 @@ curl -s -X PUT  http://127.0.0.1:1234/tasks/1 -H 'Content-Type: application/json
 curl -s -X DELETE http://127.0.0.1:1234/tasks/1           (delete a task)  
   
 2.By running shell script  
+chmod 755 task
 alias task="./task"  
   
 task list   --  List out all the tasks  
