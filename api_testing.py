@@ -29,19 +29,52 @@ class TestTask(unittest.TestCase):
         Test on getting a task by id
         """
         tester = app.test_client()
-        response = tester.get("/tasks/1")
-        statuscode = response.status_code
-        self.assertEqual(200, statuscode)
+
+        payload = json.dumps({
+            "task": "test update",
+            "date": "11/07/2022"
+        })
+
+        response = tester.post('/tasks', headers={"Content-Type": "application/json"}, data=payload)
+        if response.status_code == 201:
+             responseresult = response.text
+             seg = responseresult.split(" ")
+
+             response = tester.get("/tasks?date=11/07/2022")
+             self.assertEqual(200, response.status_code)
+
+             if response.text != None:
+                response = tester.get("/tasks/1")
+                statuscode = response.status_code
+                self.assertEqual(200, statuscode)
+             else:
+                 self.assertFalse()
 
     def test_get_all_tasks(self):
         """
         Test on getting all tasks
         """
         tester = app.test_client()
-        response = tester.get("/tasks")
-        statuscode = response.status_code
-        self.assertEqual(200, statuscode)
-        self.assertEqual(response.content_type, "application/json")
+
+        payload = json.dumps({
+            "task": "test update",
+            "date": "11/07/2022"
+        })
+
+        response = tester.post('/tasks', headers={"Content-Type": "application/json"}, data=payload)
+        if response.status_code == 201:
+            responseresult = response.text
+            seg = responseresult.split(" ")
+
+            response = tester.get("/tasks?date=11/07/2022")
+            self.assertEqual(200, response.status_code)
+
+            if response.text != None:
+                statuscode = response.status_code
+                self.assertEqual(200, statuscode)
+                self.assertEqual(response.content_type, "application/json")
+            else:
+                self.assertFalse()
 
 
     def test_get_all_tasks_bydate(self):

@@ -114,7 +114,7 @@ add)
   content_type=$'\'Content-Type: application/json\''
   postdata="'{\"task\":\"$2\",\"date\":\"$3\"}'"
   restfulurl=$baseurl"tasks"
-  # echo $restfulurl
+  #echo $restfulurl
 
   resp="curl -s -X POST $restfulurl -H 'Content-Type: application/json'  -d $postdata"
   eval $resp
@@ -145,6 +145,7 @@ update)
   resp="curl -s -X PUT $restfulurl -H 'Content-Type: application/json'  -d $postdata"
   #echo $resp
   eval $resp
+
 
 ;;
 

@@ -53,7 +53,7 @@ def get_tasks():
             logging.info('Get all Tasks')
             if return_value == []:
                 logging.info('No Tasks found')
-                return Response('No Tasks found', 200, mimetype='application/json')
+                return Response('No Tasks found', 404, mimetype='application/json')
             else:
                 return jsonify({'Tasks': return_value})
         # date is not None, return tasks on a specific date
@@ -63,7 +63,7 @@ def get_tasks():
             return_value = Task.get_tasks(date_time_obj.date().strftime('%d/%m/%Y'))
             if return_value == []:
                 logging.info('Get Tasks expired on ' + date + ' Not exist ')
-                return Response('Get Tasks expired on ' + date  + ' Not exist ', 200, mimetype='application/json')
+                return Response('Get Tasks expired on ' + date  + ' Not exist ', 404, mimetype='application/json')
             else:
                 logging.info('Get all Tasks expired on ' + date)
                 return jsonify({'Tasks': return_value})
@@ -96,7 +96,7 @@ def get_task_by_id(id):
         return_value = Task.get_task(id)
         if return_value == None:
             logging.error('Get Tasks ' + str(id) + ' Not exist ')
-            return Response('Get Tasks ' + str(id) + ' Not exist ', 200, mimetype='application/json')
+            return Response('Get Tasks ' + str(id) + ' Not exist ', 404, mimetype='application/json')
         logging.info('Get task ' + str(id))
         return jsonify({'Tasks': return_value})
     except Exception as e:
@@ -143,7 +143,7 @@ def update_task(id):
         tasktoupdate =  Task.get_task(id)
         if tasktoupdate == None:
             logging.error('Update task：task ' + str(id) + ' not exist! ')
-            return Response('Update task: task ' + str(id)  + ' not exist ', 200, mimetype='application/json')
+            return Response('Update task: task ' + str(id)  + ' not exist ', 404, mimetype='application/json')
         Task.update_task(id, request_data['task'], request_data['date'])
         response = Response("Task updated", status=200, mimetype='application/json')
         logging.info('Update task ' + str(request_data))
@@ -166,7 +166,7 @@ def remove_task(id):
         tasktodelete =  Task.get_task(id)
         if tasktodelete == None:
             logging.error('Delete task：task ' + str(id) + ' not exist! ')
-            return Response('Delete task: task ' + str(id)  + ' not exist ', 200, mimetype='application/json')
+            return Response('Delete task: task ' + str(id)  + ' not exist ', 404, mimetype='application/json')
         Task.delete_task(id)
         response = Response("Task deleted", status=200, mimetype='application/json')
         logging.info('Delete task ' + str(id))
